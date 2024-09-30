@@ -6,12 +6,12 @@
   ansible.builtin.package:
     name: mongodb-org-shell
     state: present
-- name: checking content in the server
+- name: "checking content in {{component}}  server"
   ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: entry_count
   when: component == "catalogue"
 
-- name: checking content in the server
+- name: "checking content in {{component}}  server"
   ansible.builtin.shell: mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: entry_count
   when: component == "user"
@@ -21,5 +21,5 @@
 #     msg: "Here is te value: {{product_count}}"
 
 - name: "loading {{component}} schema"
-  ansible.builtin.command: "mongo --host {{component}}.beesh.life < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host {{component}}.beesh.life < /app/schema/{{component}}.js"
   when: entry_count.stdout == "0"
