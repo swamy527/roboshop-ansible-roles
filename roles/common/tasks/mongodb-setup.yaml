@@ -9,12 +9,12 @@
 - name: checking content in the server
   ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: entry_count
-  when: component = "catalogue"
+  when: component == "catalogue"
 
 - name: checking content in the server
   ansible.builtin.shell: mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: entry_count
-  when: component = "user"
+  when: component == "user"
 
 # - name: print value
 #   ansible.builtin.debug:
