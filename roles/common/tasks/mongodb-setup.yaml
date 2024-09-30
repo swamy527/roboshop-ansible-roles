@@ -6,16 +6,16 @@
   ansible.builtin.package:
     name: mongodb-org-shell
     state: present
+    
+- name: checking catalogue content in server
+  ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  register: entry_count
+  when: component == "catalogue"
 
 - name: checking user content in server
   ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: entry_count
   when: component == "user"
-
-- name: checking catalogue content in server
-  ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-  register: entry_count
-  when: component == "catalogue"
 
 # - name: print value
 #   ansible.builtin.debug:
