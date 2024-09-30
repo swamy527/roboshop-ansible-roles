@@ -1,4 +1,4 @@
-- name: copy mongo repo fiel
+- name: copy mongo repo file
   ansible.builtin.copy:
     src: mongo.repo
     dest: /etc/yum.repos.d
