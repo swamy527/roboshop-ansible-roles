@@ -21,10 +21,10 @@
 #   ansible.builtin.debug:
 #     msg: "Here is te value: {{product_count}}"
 
-- name: "loading {{component}} schema"
+- name: "loading catalogue schema"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
   when: product_count.stdout == "0" and component == "catalogue"
 
-- name: "loading {{component}} schema"
+- name: "loading user schema"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
   when: user_count.stdout == "0" and component == "user"
