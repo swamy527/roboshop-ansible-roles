@@ -8,12 +8,12 @@
     state: present
     
 - name: checking catalogue content in server
-  ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  ansible.builtin.shell: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: product_count
   when: component == "catalogue"
 
 - name: checking user content in server
-  ansible.builtin.shell: mongo --host mongodb.beesh.life --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  ansible.builtin.shell: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: user_count
   when: component == "user"
 
@@ -22,9 +22,9 @@
 #     msg: "Here is te value: {{product_count}}"
 
 - name: "loading {{component}} schema"
-  ansible.builtin.shell: "mongo --host mongodb.beesh.life < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
   when: product_count.stdout == "0" and component == "catalogue"
 
 - name: "loading {{component}} schema"
-  ansible.builtin.shell: "mongo --host mongodb.beesh.life < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
   when: user_count.stdout == "0" and component == "user"

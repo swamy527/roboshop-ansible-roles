@@ -1,0 +1,5 @@
+MONGODB_HOST: mongodb.beesh.life
+REDIS_HOST: redis.beesh.life
+CATALOGUE_HOST: catalogue.beesh.life
+CART_HOST: cart.beesh.life
+USER_HOST: user.beesh.life
