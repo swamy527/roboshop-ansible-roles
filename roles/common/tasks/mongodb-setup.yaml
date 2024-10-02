@@ -23,8 +23,8 @@
 
 - name: "loading catalogue schema"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
-  when: product_count.stdout == "0" and component == "catalogue"
-  ignore_errors: true
+  when: component == "catalogue" and product_count.stdout == "0"
+  
 
 - name: "loading user schema"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
