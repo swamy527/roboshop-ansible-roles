@@ -28,4 +28,5 @@
 
 - name: "loading user schema"
   ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
-  when: user_count.stdout == "0" and component == "user"
+  when: component == "user" and user_count.stdout == "0" 
+  
